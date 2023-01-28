@@ -38,4 +38,4 @@ Article.init(
     }
 );
 
-module.exports = article;
+module.exports = Article;

@@ -11,7 +11,7 @@ User.hasMany(Comment, {
     foreignKey: 'user_id'
 });
 //article belongs to a user
-Article.belongsto(User, {
+Article.belongsTo(User, {
     foreignKey: 'user_id',
 });
 //article has many comments
