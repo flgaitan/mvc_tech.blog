@@ -1,8 +1,14 @@
 const router = require('express').Router();
-const userRoutes = require('./user-routes');
-//const articleRoutes = require('../api/');
 
-router.use('/users', userRoutes);
-//router.use('/projects', projectRoutes);
+const user = require('./userRoutes');
+const comment = require('./commentRoutes');
+const dashboard = require('./dashboardRoutes');
+const editArticle = require('./editArticleRoutes');
+var helpers = require('handlebars-helpers')();
+
+router.use('/users', user);
+router.use('/comment', comment);
+router.use('/dashboard', dashboard);
+router.use('/edit',editArticle);
 
 module.exports = router;

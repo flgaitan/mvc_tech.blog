@@ -1,100 +1,85 @@
+const sequelize = require('../config/connection');
+
 const router = require('express').Router();
-const { Article, User } = require('../models');
-//{ Comment }
+const {Article, Comment, User}=require('../models');
 const withAuth = require('../utils/auth');
 
-router.get('/', async (req, res) => {
-  try {
-    // Get all projects and JOIN with user data
-    const articlePost = await Article.findAll({
-      include: [
-        {
-          model: User,
-          attributes: ['username'],
-        },
-      ],
-    })
-}
-catch (err) {
-    if (err) console.log(err);
-}
+//Get all articles
+router.get('/', async (req,res) => {
+    try {
+        const articleData = await Article.findAll({
+            attributes: ['id','title','content','createdAt'],
+            include: User,
+        })
+        .then(data => {
+            console.log('homeroutes');
+            const articles = data.map(article => article.get({ plain:true }));
+            //check
+            console.log('homeroutes');
+            res.render('homepage',{ articles,logged_in: req.session.logged_in, });
+            res.status(200);
+        });
+    } catch (err) {
+        res.status(500).json(err);
+    }
+
 });
 
-//     // Serialize data so the template can read it
-//     const projects = projectData.map((project) => project.get({ plain: true }));
+//article + comments
+router.get('/article/:id', withAuth, async (req,res) => {
+    try {
+        const articleData = await Article.findOne({
+            where:{ id:req.params.id },
+            attributes: ['id','title','content','createdAt'],
+            include: [User, {
+                model: Comment,
+                attributes: ['id','content','username_id','createdAt'],
+                include: {
+                    model:User,
+                    attributes:['username']
+                }
+            }],
+        })
+        .then(article => {
+            console.log('homeroutes');
+            const data = article.get({plain:true});
+            res.render('single-article',{data,logged_in: req.session.logged_in,current_user: req.session.username});
+            console.log('homeroutes');
+        });
+     } catch (err) {
+        res.status(500).json(err);
+    }
 
-//     // Pass serialized data and session flag into template
-//     res.render('homepage', { 
-//       projects, 
-//       logged_in: req.session.logged_in 
-//     });
-//   } catch (err) {
-//     res.status(500).json(err);
-//   }
-// });
+});
 
-// router.get('/project/:id', async (req, res) => {
-//   try {
-//     const projectData = await Project.findByPk(req.params.id, {
-//       include: [
-//         {
-//           model: User,
-//           attributes: ['name'],
-//         },
-//       ],
-//     });
+//logging in
+router.get('/login', (req, res) => {
+    if (req.session.logged_in) {
+        res.redirect('/');
+        return;
+    }
+    res.render('login');
+});
 
-//     const project = projectData.get({ plain: true });
-
-//     res.render('project', {
-//       ...project,
-//       logged_in: req.session.logged_in
-//     });
-//   } catch (err) {
-//     res.status(500).json(err);
-//   }
-// });
-
-// // Use withAuth middleware to prevent access to route
-// router.get('/profile', withAuth, async (req, res) => {
-//   try {
-//     // Find the logged in user based on the session ID
-//     const userData = await User.findByPk(req.session.user_id, {
-//       attributes: { exclude: ['password'] },
-//       include: [{ model: Project }],
-//     });
-
-//     const user = userData.get({ plain: true });
-
-//     res.render('profile', {
-//       ...user,
-//       logged_in: true
-//     });
-//   } catch (err) {
-//     res.status(500).json(err);
-//   }
-// });
-
-// router.get('/login', (req, res) => {
-//   // If the user is already logged in, redirect the request to another route
-//   if (req.session.logged_in) {
-//     res.redirect('/profile');
-//     return;
-//   }
-
-//   res.render('login');
-//});
+//get all articles with comments
+router.get('/comment', async (req,res) => {
+    try {
+        const articleData= await Article.findOne({
+            where:{ id:1 },
+            include: [User, {
+                model: Comment,
+                attributes: ['id','content','username_id','createdAt'],
+                include:{
+                    model:User,
+                    attributes:['username']
+                }
+            }],
+        });
+        console.log('display article data'+ articleData);
+        res.status(200).json(articleData);
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
 
 module.exports = router;
-
-
-
-
-
-
-
-
-
-
-
-
