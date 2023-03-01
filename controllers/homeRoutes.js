@@ -12,10 +12,10 @@ router.get('/', async (req, res) => {
             include: User,
         })
             .then(data => {
-                console.log('homeroutes');
+                console.log('data');
                 const articles = data.map(article => article.get({ plain: true }));
                 //check
-                console.log('homeroutes');
+                console.log('articles');
                 res.render('homepage', { articles, logged_in: req.session.logged_in, });
                 res.status(200);
             });
@@ -41,10 +41,10 @@ router.get('/article/:id', withAuth, async (req, res) => {
             }],
         })
             .then(article => {
-                console.log('homeroutes');
+                console.log('artcile');
                 const data = article.get({ plain: true });
                 res.render('single-article', { data, logged_in: req.session.logged_in, current_user: req.session.username });
-                console.log('homeroutes');
+                console.log('data');
             });
     } catch (err) {
         res.status(500).json(err);

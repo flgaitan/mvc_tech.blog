@@ -1,12 +1,13 @@
 const router = require('express').Router();
+const api = require('./../api')
 
-const user = require('./userRoutes');
-const comment = require('./commentRoutes');
-const dashboard = require('./dashboardRoutes');
-const editArticle = require('./editArticleRoutes');
-var helpers = require('handlebars-helpers')();
+const user = require('./user');
+const comment = require('./comment');
+const dashboard = require('./dashboard');
+const editArticle = require('./editArticle');
+const helpers = require('handlebars-helpers')();
 
-router.use('/users', user);
+router.use('/user', user);
 router.use('/comment', comment);
 router.use('/dashboard', dashboard);
 router.use('/edit',editArticle);
