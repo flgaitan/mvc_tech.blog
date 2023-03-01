@@ -1,10 +1,8 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-
-//create post model for "article"
+//creates model for article
 class Comment extends Model {}
-//set up fields and rules for model
 Comment.init(
     {
         id: {
@@ -19,7 +17,6 @@ Comment.init(
         },
         user_id:{
             type: DataTypes.INTEGER,
-            //allowNull: false,
             references: {
                 model: 'user',
                 key: 'id'
@@ -27,7 +24,6 @@ Comment.init(
         },
         article_id: {
             type: DataTypes.INTEGER,
-            //allowNull: false,
             references: {
                 model: 'article',
                 key: 'id'

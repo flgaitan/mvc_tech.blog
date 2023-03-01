@@ -2,19 +2,19 @@ const Article = require('./Article');
 const Comment = require('./Comment');
 const User = require('./User');
 
-//article post relationship
+//article - post relationship
 User.hasMany(Article, {
     foreignKey: 'user_id'
 });
-//user to comments
+//user - comments
 User.hasMany(Comment, {
     foreignKey: 'user_id'
 });
-//article belongs to a user
+//article belongs to user
 Article.belongsTo(User, {
     foreignKey: 'user_id',
 });
-//article has many comments
+//has many comments
 Article.hasMany(Comment, {
     foreignKey: 'post_id'
 });
