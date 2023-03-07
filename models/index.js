@@ -16,11 +16,11 @@ Article.belongsTo(User, {
 });
 //has many comments
 Article.hasMany(Comment, {
-    foreignKey: 'post_id'
+    foreignKey: 'article_id'
 });
 //comment belongs to article
 Comment.belongsTo(Article, {
-    foreignKey: 'post_id'
+    foreignKey: 'article_id'
 });
 //comment belongs to user
 Comment.belongsTo(User, {

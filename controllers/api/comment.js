@@ -9,7 +9,7 @@ router.post('/', withAuth, (req, res) => {
         console.log('comment.js');
         Comment.create({
             content: req.body.content,
-            username_id: req.session.user_id,
+            user_id: req.session.user_id,
             article_id: req.body.article_id
         })
         .then(newComment => {

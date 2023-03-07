@@ -14,7 +14,8 @@ const commentFormHandler = async (event) => {
         })
             .then(response => response.json())
             .then(data => {
-                console.log('Comment successful');
+                console.log('Comment successful')
+                //console.log(data);
                 document.location.reload();
 
             })

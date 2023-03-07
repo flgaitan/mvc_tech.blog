@@ -15,7 +15,7 @@ const articleFormHandler = async (event) => {
         }).then(response => response.json())
             .then(data => {
                 console.log('article posted');
-                document.location.replace('/api/dashboard');
+                document.location.replace('/dashboard');
 
             }).catch((err) => {
                 console.error(err);
