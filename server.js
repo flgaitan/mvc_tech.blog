@@ -35,6 +35,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //routes are in the controllers but no folder named routes
 app.use(require('./controllers'));
 
-sequelize.sync({ force: false }).then(() => {
-  app.listen(PORT, () => console.log('Now listening on PORT 3001!'));
+app.listen(PORT, () => {
+  console.log(`Now listening on http://localhost:${PORT}`);
+  sequelize.sync({ force: false })
 });
