@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/flgaitan/mvc_tech.blog#readme",
   "dependencies": {
-    "bcrypt": "^5.1.0",
+    "bcryptjs": "^2.4.3",
     "bootstrap": "^5.2.3",
     "connect-session-sequelize": "^7.1.5",
     "dotenv": "^16.0.3",
@@ -38,5 +38,8 @@
     "eslint-config-prettier": "^8.6.0",
     "nodemon": "^2.0.20",
     "prettier": "^2.8.2"
+  },
+  "engines": {
+    "node": "16.x"
   }
 }
