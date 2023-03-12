@@ -1,7 +1,7 @@
 const path = require('path')
 let currentPath = path.join(__dirname)
-const Article = require('./Article');
 const Comment = require('./Comment');
+const Article = require('./Article');
 const User = require('./User');
 
 //article - post relationship
