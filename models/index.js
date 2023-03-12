@@ -3,6 +3,7 @@ let currentPath = path.join(__dirname)
 const Comment = require('./Comment');
 const Article = require('./Article');
 const User = require('./User');
+console.log(require('./Comment'));
 
 //article - post relationship
 User.hasMany(Article, {
