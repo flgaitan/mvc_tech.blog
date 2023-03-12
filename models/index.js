@@ -1,6 +1,6 @@
-const Article = require('./Article');
-const Comment = require('./Comment');
-const User = require('./User');
+const Article = require('./Article.js');
+const Comment = require('./Comment.js');
+const User = require('./User.js');
 
 //article - post relationship
 User.hasMany(Article, {
