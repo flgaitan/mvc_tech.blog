@@ -33,7 +33,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 //routes are in the controllers but no folder named routes
-app.use(require('./controllers'));
+app.use(routes);
 
 app.listen(PORT, () => {
   console.log(`Now listening on http://localhost:${PORT}`);
