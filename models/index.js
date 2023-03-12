@@ -1,4 +1,6 @@
-const Article = require('./Article.js');
+const path = require('path')
+let currentPath = path.join(__dirname)
+const Article = require(currentPath+'/Article.js');
 const Comment = require('./Comment.js');
 const User = require('./User.js');
 
