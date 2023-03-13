@@ -10,6 +10,6 @@ const helpers = require('handlebars-helpers')();
 router.use('/user', user);
 router.use('/comment', comment);
 router.use('/dashboard', dashboard);
-router.use('/edit',editArticle);
+router.use('/editArticle',editArticle);
 
 module.exports = router;
