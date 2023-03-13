@@ -12,7 +12,7 @@ router.get('/:id', withAuth, async (req, res) => {
             attributes: ['id','title','content','createdAt'],
         }).
         then(article => {
-            const data = article.get({ plain: true });
+            const data = Article.get({ plain: true });
             console.log('editArticle', data);
             res.render('edit-article-delete', { data, logged_in: req.session.logged_in, current_user: req.session.username });
             console.log('editArticle');
