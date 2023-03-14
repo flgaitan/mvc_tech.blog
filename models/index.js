@@ -6,28 +6,28 @@ const user = require('./user');
 console.log(require('./comment'));
 
 //article - post relationship
-User.hasMany(Article, {
+user.hasMany(article, {
     foreignKey: 'user_id'
 });
 //user - comments
-User.hasMany(Comment, {
+user.hasMany(comment, {
     foreignKey: 'user_id'
 });
 //article belongs to user
-Article.belongsTo(User, {
+article.belongsTo(user, {
     foreignKey: 'user_id',
 });
 //has many comments
-Article.hasMany(Comment, {
+article.hasMany(comment, {
     foreignKey: 'article_id'
 });
 //comment belongs to article
-Comment.belongsTo(Article, {
+comment.belongsTo(article, {
     foreignKey: 'article_id'
 });
 //comment belongs to user
-Comment.belongsTo(User, {
+comment.belongsTo(user, {
     foreignKey: 'user_id'
 });
 
-module.exports = { Article, Comment, User};
+module.exports = { article, comment, user};
