@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Article } = require('../../models');
+const { article } = require('../../models');
 const withAuth = require('../../utils/auth');
 var helpers = require('handlebars-helpers')();
 
@@ -27,7 +27,7 @@ router.get('/:id', withAuth, async (req, res) => {
 router.put('/:id', withAuth, (req, res) => {
      try {
         console.log('editArticle.js');
-        Article.update({
+        article.update({
             title: req.body.title,
             content: req.body.content,
             username_id: req.session.user_id
@@ -47,7 +47,7 @@ router.put('/:id', withAuth, (req, res) => {
 
 //delete content
 router.delete('/:id', withAuth, (req, res) => {
-    Article.destroy({
+    article.destroy({
         where: {
             id: req.body.article_id
         }
