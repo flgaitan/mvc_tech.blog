@@ -8,8 +8,8 @@ const editArticle = require('./editArticle');
 const helpers = require('handlebars-helpers')();
 
 router.use('/user', user);
-router.use('/comment', comment);
-router.use('/dashboard', dashboard);
-router.use('/editArticle',editArticle);
+router.use('/comment', Comment);
+router.use('/dashboard', Dashboard);
+router.use('/editArticle',EditArticle);
 
 module.exports = router;
