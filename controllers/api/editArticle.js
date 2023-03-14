@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { article } = require('../../models');
+const { Article } = require('../../models');
 const withAuth = require('../../utils/auth');
 var helpers = require('handlebars-helpers')();
 
@@ -12,7 +12,7 @@ router.get('/:id', withAuth, async (req, res) => {
             attributes: ['id','title','content','createdAt'],
         }).
         then(article => {
-            const data = Article.get({ plain: true });
+            const data = article.get({ plain: true });
             console.log('editArticle', data);
             res.render('edit-article-delete', { data, logged_in: req.session.logged_in, current_user: req.session.username });
             console.log('editArticle');
@@ -27,7 +27,7 @@ router.get('/:id', withAuth, async (req, res) => {
 router.put('/:id', withAuth, (req, res) => {
      try {
         console.log('editArticle.js');
-        article.update({
+        Article.update({
             title: req.body.title,
             content: req.body.content,
             username_id: req.session.user_id

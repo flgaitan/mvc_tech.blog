@@ -1,6 +1,6 @@
 const sequelize = require('../../config/connection');
 const router = require('express').Router();
-const { article, user } = require('../../models');
+const { Article, User } = require('../../models');
 const withAuth = require('../../utils/auth');
 var helpers = require('handlebars-helpers')();
 
@@ -32,8 +32,8 @@ var helpers = require('handlebars-helpers')();
 //post article
 router.post('/', withAuth, (req, res) => {
     try {
-        console.log('dashboardroutes.js');
-        article.create({
+        console.log('dashboard.js');
+        Article.create({
             title: req.body.title,
             content: req.body.content,
             username_id: req.session.user_id

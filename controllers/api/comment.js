@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { comment } = require('../../models');
+const { Comment } = require('../../models');
 const withAuth = require('../../utils/auth');
 var helpers = require('handlebars-helpers')();
 
@@ -7,7 +7,7 @@ var helpers = require('handlebars-helpers')();
 router.post('/', withAuth, (req, res) => {
     try {
         console.log('comment.js');
-        comment.create({
+        Comment.create({
             content: req.body.content,
             user_id: req.session.user_id,
             article_id: req.body.article_id
