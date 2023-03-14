@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { user } = require('../../models');
+const { User } = require('../../models');
 const helpers = require('handlebars-helpers')();
 
 //route for logging in
