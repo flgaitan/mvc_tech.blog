@@ -13,7 +13,7 @@ router.get('/', async (req, res) => {
         })
             .then(data => {
                 console.log('data');
-                const articles = data.map(Article => Article.get({ plain: true }));
+                const articles = data.map(article => article.get({ plain: true }));
                 //check
                 console.log('articles');
                 res.render('homepage', { articles, logged_in: req.session.logged_in, });
@@ -65,9 +65,9 @@ router.get('/article/:id', withAuth, async (req, res) => {
                 }
             }],
         })
-            .then(Article => {
+            .then(article => {
                 console.log('article');
-                const data = Article.get({ plain: true });
+                const data = article.get({ plain: true });
                 res.render('single-article', { data, logged_in: req.session.logged_in, current_user: req.session.username });
                 console.log('data', data);
             });

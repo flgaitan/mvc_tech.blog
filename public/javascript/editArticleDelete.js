@@ -29,7 +29,7 @@ const deleteFormHandler = async (event) => {
     const articleID = document.querySelector('#articleID').innerHTML;
     if (articleID) {
         const deleteURL = '/api/edit/' + articleID;
-        const delArticle = await fetch(deleteURL, {
+        const deleteArticle = await fetch(deleteURL, {
             method: 'DELETE',
             body: JSON.stringify({ article_id: articleID }),
             headers: { 'Content-Type': 'application/json' },
