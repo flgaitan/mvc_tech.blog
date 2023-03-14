@@ -3,7 +3,7 @@ const sequelize = require('../config/connection');
 
 
 //create post model for "article"
-class Article extends Model {}
+class articles extends Model {}
 //set up fields and rules for model
 Article.init(
     {
