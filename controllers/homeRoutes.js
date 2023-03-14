@@ -38,7 +38,7 @@ router.get('/dashboard', withAuth, async (req,res) => {
         })
         .then (data => {
             console.log('dashboard');
-            const articles = data.map(Article => Article.get({ plain:true }));
+            const articles = data.map(article => article.get({ plain:true }));
             const view = JSON.stringify(data);
             console.log('dashboard', view);
             res.render('dashboard',{ articles,logged_in: req.session.logged_in, });
@@ -53,7 +53,7 @@ router.get('/dashboard', withAuth, async (req,res) => {
 //article + comments
 router.get('/article/:id', withAuth, async (req, res) => {
     try {
-        const articleData = await Article.findOne({
+        const articleData = await article.findOne({
             where: { id: req.params.id },
             attributes: ['id', 'title', 'content', 'createdAt'],
             include: [User, {
@@ -89,7 +89,7 @@ router.get('/login', (req, res) => {
 //get all articles with comments
 router.get('/comment', async (req, res) => {
     try {
-        const articleData = await Article.findOne({
+        const articleData = await article.findOne({
             where: { id: 1 },
             include: [User, {
                 model: Comment,
