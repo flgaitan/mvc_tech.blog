@@ -8,14 +8,14 @@ const articleDb = require('./article-seeds.json');
 const seedData = async () => {
     await sequelize.sync({ force: true });
 //creating for user
-    const users = await User.bulkCreate(userDb, {
+    const users = await user.bulkCreate(userDb, {
         individualHooks: true,
         returning: true,
     });
     console.log('------USER SEEDED--------');
 
 //creating for article
-const articles = await Article.bulkCreate(articleDb, {
+const articles = await article.bulkCreate(articleDb, {
     individualHooks: true,
     returning: true,
 });
@@ -23,7 +23,7 @@ const articles = await Article.bulkCreate(articleDb, {
     console.log('------ARTICLE SEEDED--------');
 
 //creating for comment
-    const comments = await Comment.bulkCreate(commentDb, {
+    const comments = await comment.bulkCreate(commentDb, {
         individualHooks: true,
         returning: true,
 });
