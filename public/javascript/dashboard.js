@@ -8,7 +8,7 @@ const articleFormHandler = async (event) => {
     if (content && title) {
         console.log(content, title)
 
-        const newarticle = await fetch('/api/dashboard', {
+        const newArticle = await fetch('/api/dashboard', {
             method: 'POST',
             body: JSON.stringify({ content, title }),
             headers: { 'Content-Type': 'application/json' },

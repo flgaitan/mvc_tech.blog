@@ -10,13 +10,13 @@ router.get('/', async (req, res) => {
         const articleData = await Article.findAll({
             attributes: ['id', 'title', 'content', 'createdAt'],
             include: User,
-
         })
             .then(data => {
-                console.log(data);
+                console.log (articleData, "articleData" );
+                console.log('data', data);
                 const articles = data.map(article => article.get({ plain: true }));
                 //check
-                console.log('homeroutes');
+                console.log('articles', articles);
                 res.render('homepage', { articles, logged_in: req.session.logged_in, });
                 res.status(200);
             });
@@ -26,6 +26,33 @@ router.get('/', async (req, res) => {
 
 });
 
+
+// router.get('/dashboard', withAuth, async (req, res) => {
+//     try {
+//         console.log('dashboard : ' + req.session.user_id);
+//         const userID = req.session.user_id;
+//         await Article.findAll({
+//             where: {
+//                 user_id: userID
+//             },
+//             attributes: ['id', 'title', 'content', 'createdAt'],
+//             include: User
+//         })
+//         .then (data => {
+//             console.log('dashboard!');
+//             const articles = data.map(article => article.get({ plain:true }));
+//             const view = JSON.stringify(data);
+//             console.log('dashboard', view);
+//             res.render('dashboard', { articles, logged_in: req.session.logged_in });
+//             res.status(200);
+//         });
+//     }
+//     catch (err) {
+//         res.status(500).json(err);
+//     }
+// });
+
+
 //article + comments
 router.get('/article/:id', withAuth, async (req, res) => {
     try {
@@ -34,18 +61,18 @@ router.get('/article/:id', withAuth, async (req, res) => {
             attributes: ['id', 'title', 'content', 'createdAt'],
             include: [User, {
                 model: Comment,
-                attributes: ['id', 'content', 'username_id', 'createdAt'],
+                attributes: ['id', 'content', 'user_id', 'createdAt'],
                 include: {
                     model: User,
-                    attributes: ['username']
+                    attributes: ['user']
                 }
             }],
         })
             .then(article => {
-                console.log('homeroutes');
+                console.log('article');
                 const data = article.get({ plain: true });
-                res.render('single-article', { data, logged_in: req.session.logged_in, current_user: req.session.username });
-                console.log('homeroutes');
+                res.render('single-article', { data, logged_in: req.session.logged_in, current_user: req.session.user_id });
+                console.log('data', data);
             });
     } catch (err) {
         res.status(500).json(err);
@@ -72,7 +99,7 @@ router.get('/comment', async (req, res) => {
                 attributes: ['id', 'content', 'username_id', 'createdAt'],
                 include: {
                     model: User,
-                    attributes: ['username']
+                    attributes: ['user_id']
                 }
             }],
         });
